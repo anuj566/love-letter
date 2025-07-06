@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Love Letter for Neha</title>
+  <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Quicksand&display=swap" rel="stylesheet"/>
+  <style>
+    html, body {
+      margin: 0;
+      padding: 0;
+      background: linear-gradient(120deg, #ffdce0, #ffe8ec);
+      font-family: 'Quicksand', sans-serif;
+      height: 100%;
+      overflow-x: hidden;
+    }
+
+    .container {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      position: relative;
+      overflow: hidden;
+      padding-top: 50px;
+    }
+
+    .envelope-container {
+      position: relative;
+      width: 100%;
+      max-width: 400px;
+      z-index: 2;
+    }
+
+    .envelope {
+      width: 100%;
+      height: 200px;
+      background: #ffc0cb;
+      border-radius: 10px;
+      box-shadow: 0 0 20px rgba(255, 0, 0, 0.2);
+      position: relative;
+      cursor: pointer;
+      overflow: hidden;
+    }
+
+    .flap {
+      width: 0;
+      height: 0;
+      border-left: 200px solid transparent;
+      border-right: 200px solid transparent;
+      border-top: 100px solid #ff7f9f;
+      position: absolute;
+      top: 0;
+      left: 0;
+      z-index: 3;
+      transform-origin: top;
+      transition: transform 1s ease;
+    }
+
+    .heart-seal {
+      width: 40px;
+      height: 40px;
+      background: red;
+      border-radius: 50%;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-size: 20px;
+      z-index: 4;
+    }
+
+   .letter {
+  position: fixed;
+  top: 15%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 90vw;
+  max-width: 600px;
+  max-height: 70vh;
+  background: #fff6f6 url('https://www.transparenttextures.com/patterns/paper-fibers.png');
+  background-size: cover;
+  padding: 30px;
+  font-size: 16px;
+  line-height: 1.6;
+  border-radius: 10px;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+  overflow-y: auto;
+  transition: opacity 1.5s ease;
+  opacity: 0;
+  white-space: pre-wrap;
+  z-index: 10;
+}
+
+.letter.visible {
+  opacity: 1;
+}
+
+
+    .heart {
+      position: absolute;
+      width: 20px;
+      height: 20px;
+      background: red;
+      transform: rotate(45deg);
+      animation: floatHeart 4s ease-in-out infinite;
+      opacity: 0.7;
+    }
+
+    .heart::before,
+    .heart::after {
+      content: '';
+      position: absolute;
+      width: 20px;
+      height: 20px;
+      background: red;
+      border-radius: 50%;
+    }
+
+    .heart::before {
+      top: -10px;
+      left: 0;
+    }
+
+    .heart::after {
+      top: 0;
+      left: -10px;
+    }
+
+    @keyframes floatHeart {
+      0% { transform: translateY(0) rotate(45deg); opacity: 0.8; }
+      100% { transform: translateY(-600px) rotate(45deg); opacity: 0; }
+    }
+
+    .confetti {
+      position: absolute;
+      width: 6px;
+      height: 6px;
+      background: gold;
+      animation: sparkle 3s infinite;
+      opacity: 0.6;
+    }
+
+    @keyframes sparkle {
+      0% { transform: translateY(0); opacity: 0.6; }
+      100% { transform: translateY(600px); opacity: 0; }
+    }
+
+    .background-text {
+      position: absolute;
+      width: 100%;
+      font-family: 'Pacifico', cursive;
+      font-size: 36px;
+      color: rgba(255, 0, 102, 0.1);
+      text-align: center;
+      animation: fadeInOut 5s infinite;
+      z-index: 0;
+    }
+
+    @keyframes fadeInOut {
+      0%, 100% { opacity: 0; }
+      50% { opacity: 1; }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="background-text" style="top: 10%">I ❤️ U</div>
+    <div class="background-text" style="top: 80%; animation-delay: 2.5s;">You’re Special</div>
+
+    <div class="envelope-container">
+      <div class="envelope" onclick="openEnvelope()">
+        <div class="flap" id="flap"></div>
+        <div class="heart-seal">❤️</div>
+      </div>
+    </div>
+
+    <div class="letter" id="letter"></div>
+    <div id="hearts"></div>
+  </div>
+
+  <script>
+    const message = `Dear Neha 💖,
+
+The first time I saw you in the Hindi lecture, you looked absolutely stunning in your pink top. 💗
+My eyes couldn’t stop looking at you — it was like they were under a spell. My heart felt so peaceful and happy just seeing you... and my mind kept wondering, *“How can someone look so cute and sexy at the same time?”* 💭💘
+
+I really wanted to talk to you that day, but I was too nervous to approach you directly. So I decided to ask for help from Pradnya... and the rest, you already know. 😊
+
+But today, when you said you don’t feel comfortable talking to me, and when you texted *“Jabardasti kyu”*, I honestly didn’t know how to react. I don’t know where this gap between us came from… but I promise you — I’ll do everything I can to fill that gap and make you feel truly comfortable around me. 🤝💗
+
+Also, I’m really sorry for the recent times when you felt I ignored your messages. Please believe me when I say — whenever I see your message, I try to reply immediately. The only times I didn’t respond were when I genuinely didn’t check my phone. I’ll make sure this never happens again. 🙏📱
+
+And lastly, the most important thing I want you to know…
+
+**I love you more than anything else in this world.** ❤️🌍
+Always yours,
+**Anuu** 💌`;
+
+    let opened = false;
+    function openEnvelope() {
+      if (opened) return;
+      opened = true;
+
+      document.getElementById("flap").style.transform = "rotateX(-180deg)";
+      const letter = document.getElementById("letter");
+      setTimeout(() => {
+        letter.classList.add("visible");
+        startTyping();
+        spawnHearts();
+        spawnConfetti();
+      }, 1000);
+    }
+
+    function startTyping() {
+      const letter = document.getElementById("letter");
+      letter.innerHTML = "";
+      let i = 0;
+      function typing() {
+        if (i < message.length) {
+          letter.innerHTML += message[i];
+          i++;
+          setTimeout(typing, 65);
+        }
+      }
+      typing();
+    }
+
+    function spawnHearts() {
+      const hearts = document.getElementById("hearts");
+      for (let i = 0; i < 40; i++) {
+        const heart = document.createElement("div");
+        heart.className = "heart";
+        heart.style.left = Math.random() * 100 + "%";
+        heart.style.bottom = "0";
+        heart.style.animationDuration = (2 + Math.random() * 2) + "s";
+        hearts.appendChild(heart);
+      }
+    }
+
+    function spawnConfetti() {
+      const hearts = document.getElementById("hearts");
+      for (let i = 0; i < 40; i++) {
+        const confetti = document.createElement("div");
+        confetti.className = "confetti";
+        confetti.style.left = Math.random() * 100 + "%";
+        confetti.style.top = "0";
+        confetti.style.backgroundColor = ["#FFD700", "#FF69B4", "#FF4500"][Math.floor(Math.random() * 3)];
+        confetti.style.animationDuration = (2 + Math.random() * 2) + "s";
+        hearts.appendChild(confetti);
+      }
+    }
+  </script>
+</body>
+</html>
